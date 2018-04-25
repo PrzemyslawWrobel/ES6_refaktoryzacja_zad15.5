@@ -1,0 +1,1 @@
+# ES6_refaktoryzacja_zad15.5
