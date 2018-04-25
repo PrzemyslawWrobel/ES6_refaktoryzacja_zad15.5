@@ -1,0 +1,24 @@
+{
+  "name": "ES6_refaktoryzacja_zad_15.5",
+  "version": "1.0.0",
+  "description": "find gif on giphy",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrzemyslawWrobel/ES6_refaktoryzacja_zad_15.5"
+  },
+  "author": "Przemysław Wróbel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrzemyslawWrobel/ES6_refaktoryzacja_zad_15.5/issues"
+  },
+  "homepage": "https://github.com/PrzemyslawWrobel/ES6_refaktoryzacja_zad15.5#readme",
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "http-server": "^0.11.1"
+  }
+}
