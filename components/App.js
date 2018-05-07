@@ -9,53 +9,34 @@ App = React.createClass({
 	},
 
 	handleSearch: function(searchingText) { //1. pobierz na wejściu wpisywany tekst,
-
 		this.setState({
 			loading: true //2. 	zasygnalizuj, że zaczął się proces ładowania
-
 		});
 
-		this.getGif(searchingText, function(gif){ //3.	Rozpocznij pobieranie gifa,
-
+		this.getGif(searchingText).then (gif => { //3.	Rozpocznij pobieranie gifa,
 			this.setState({ //4.	Na zakończenie pobierania:
-
 				loading: false, //a 	przestań sygnalizować ładowanie,
-
 				gif: gif, //b 	ustaw nowego gifa z wyniku pobierania,
-
 				searchingText: searchingText //c 	ustaw nowy stan dla wyszukiwanego tekstu.
-
 			});
-
 		}.bind(this));
-
 	},
-
 
 	getGif: function(searchingText) { //1.	Na wejście metody getGif przyjmujemy dwa parametry: wpisywany tekst (searchingText) i funkcję, która ma się wykonać po pobraniu gifa (callback)
 		return new Promise (
 			(resolve, reject) => {
 				const GIPHY_API_URL = 'https://api.giphy.com'; // zrejestrować się i stworzyć apke
-
 				const GIPHY_PUB_KEY = 'iPKff3oClVBiOLjhs4NAAeu55690HVpz';
-
 				let url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText; //2 2.	Konstruujemy adres URL dla API Giphy 
-
 				let xhr = new XMLHttpRequest(); //3 Wywołujemy całą sekwencję tworzenia zapytania XHR do serwera i wysyłamy je.
-				
 				xhr.open('GET', url);
-				
 				xhr.onload = function(){
 					if (xhr.status === 200) {
 						let data = JSON.parse(xhr.responseText).data; // 4.	W obiekcie odpowiedzi mamy obiekt z danymi. W tym miejscu rozpakowujemy je sobie do zmiennej data, aby nie pisać za każdym razem response.data.
-
 							let gif = { // 5.	Układamy obiekt gif na podstawie tego co otrzymaliśmy z serwera
-
 								url: data.fixed_width_downsampled_url,
 								sourceUrl: data.url
-
 							};
-
 							resolve(gif); //6. Przekazujemy obiekt do funkcji callback, którą przekazaliśmy jako drugi parametr metody getGif.
 					}
 					reject(new Error(`XMLHttpRequest Error: ${this.statusText}`));
@@ -65,19 +46,11 @@ App = React.createClass({
 		);
 	},
 
-	
-
-
-
 	render: function() {
 		var styles = {
-
 			margin: '0 auto',
-
 			textAlign: 'center',
-
 			width: '90%'
-
 		};
 
 		return (
